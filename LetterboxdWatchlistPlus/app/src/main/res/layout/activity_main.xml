@@ -35,11 +35,13 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:itemBackground="?attr/colorAccent"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="?attr/colorAccent"
+        app:menu="@menu/bottom_nav_menu"/>
+    <!--        app:itemBackground="?attr/colorAccent"-->
 
-<!--    <TextView-->
+
+    <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="Hello World!"-->
