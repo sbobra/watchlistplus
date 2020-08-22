@@ -1,9 +1,10 @@
-package com.example.letterboxdwatchlistplus
+package com.example.letterboxdwatchlistplus.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.letterboxdwatchlistplus.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

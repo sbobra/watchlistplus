@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/watchlistFragment"
-        android:name="com.example.letterboxdwatchlistplus.WatchlistFragment"
+        android:name="com.example.letterboxdwatchlistplus.views.WatchlistFragment"
         android:label="fragment_watchlist"
         tools:layout="@layout/fragment_watchlist" >
         <action
@@ -18,13 +18,13 @@
 
     <fragment
         android:id="@+id/queueFragment"
-        android:name="com.example.letterboxdwatchlistplus.QueueFragment"
+        android:name="com.example.letterboxdwatchlistplus.views.QueueFragment"
         android:label="fragment_queue"
         tools:layout="@layout/fragment_queue" />
 
     <fragment
         android:id="@+id/importFragment"
-        android:name="com.example.letterboxdwatchlistplus.ImportFragment"
+        android:name="com.example.letterboxdwatchlistplus.views.ImportFragment"
         android:label="fragment_import"
         tools:layout="@layout/fragment_import" />
 </navigation>
