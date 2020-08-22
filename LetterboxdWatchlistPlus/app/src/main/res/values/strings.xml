@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_import_fragment">Hello import fragment</string>
     <string name="hello_watchlist_fragment">Hello watchlist fragment</string>
+    <string name="hello_queue_fragment">Hello queue fragment</string>
     <string name="nav_list">List</string>
     <string name="nav_queue">Queue</string>
     <string name="nav_search">Search</string>
