@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ImportFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    tools:context=".views.ImportFragment"> -->
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/welcome_text"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_import_fragment" />
+        android:layout_height="wrap_content"
+        android:text="@string/hello_import_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Click me!"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text"/>
+
+    <TextView
+        android:id="@+id/welcome_text_2"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_import_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

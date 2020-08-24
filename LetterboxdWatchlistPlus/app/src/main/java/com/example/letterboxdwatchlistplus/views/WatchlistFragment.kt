@@ -54,7 +54,7 @@ class WatchlistFragment : Fragment() {
 
         binding.textTest.setOnClickListener { onClick() }
 
-        val watchlistViewModel: WatchlistViewModel by activityViewModels()
+        val watchlistViewModel: WatchlistViewModel by viewModels()
         watchlistViewModel.getText().observe(viewLifecycleOwner, Observer<String>{ text ->
             // update UI
         })
