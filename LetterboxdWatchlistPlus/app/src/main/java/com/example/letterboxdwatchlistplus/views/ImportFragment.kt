@@ -36,7 +36,7 @@ class ImportFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val importViewModel: ImportViewModel by viewModels()
+        val importViewModel: ImportViewModel by activityViewModels()
 
         _binding = FragmentImportBinding.inflate(inflater, container, false)
 
