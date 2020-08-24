@@ -39,6 +39,7 @@ class ImportFragment : Fragment() {
         val importViewModel: ImportViewModel by activityViewModels()
 
         _binding = FragmentImportBinding.inflate(inflater, container, false)
+        binding.importViewModel = importViewModel
 
         binding.button.setOnClickListener {
             // TODO:

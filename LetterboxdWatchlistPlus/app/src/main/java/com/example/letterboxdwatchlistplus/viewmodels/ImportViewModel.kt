@@ -19,4 +19,12 @@ class ImportViewModel : ViewModel() {
         return repository.getButtonClicked()
     }
 
+    fun button2Clicked() {
+        repository.button2Clicked()
+    }
+
+    fun getButton2Clicked() : Int {
+        return repository.getButton2Clicked()
+    }
+
 }
