@@ -28,4 +28,11 @@ class ImportViewModel : ViewModel() {
         return repository.getButton2Clicked()
     }
 
+    fun button3Clicked() {
+        repository.button3Clicked()
+    }
+
+    fun getButton3Clicked() : MutableLiveData<Int> {
+        return repository.getButton3Clicked()
+    }
 }

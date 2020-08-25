@@ -49,5 +49,23 @@
             app:layout_constraintTop_toBottomOf="@id/welcome_text_2"/>
         <!--            android:onClick="@{(v) -> importViewModel.button2Clicked()}"-->
 
+        <TextView
+            android:id="@+id/welcome_text_3"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(importViewModel.getButton3Clicked())}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button2"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Click me one more time!!"
+            android:onClick="@{() -> importViewModel.button3Clicked()}"
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_text_3"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

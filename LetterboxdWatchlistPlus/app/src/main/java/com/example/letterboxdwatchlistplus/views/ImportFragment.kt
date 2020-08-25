@@ -40,7 +40,7 @@ class ImportFragment : Fragment() {
 
         _binding = FragmentImportBinding.inflate(inflater, container, false)
         binding.importViewModel = importViewModel
-        binding.lifecycleOwner = activity // need to call this when using livedata and viewbinding
+        binding.lifecycleOwner = viewLifecycleOwner // need to call this when using livedata and viewbinding
 
         binding.button.setOnClickListener {
             importViewModel.buttonClicked()

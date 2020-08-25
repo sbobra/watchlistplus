@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 class ImportRepository {
     private var buttonClicked : MutableLiveData<Int> = MutableLiveData(0)
     private var buttonClicked2 : ObservableInt = ObservableInt(10)
+    private var buttonCLicked3 : MutableLiveData<Int> = MutableLiveData(0)
+
 
     fun buttonClicked() {
         buttonClicked.value = buttonClicked.value?.plus(1)
@@ -24,5 +26,15 @@ class ImportRepository {
     fun getButton2Clicked() : ObservableInt {
         Log.i("Test", "Get: ${buttonClicked2.get()}")
         return buttonClicked2
+    }
+
+    fun button3Clicked() {
+        buttonCLicked3.value = buttonCLicked3.value?.plus(1)
+        Log.i("Test", "Updated: ${buttonCLicked3.value}")
+    }
+
+    fun getButton3Clicked() : MutableLiveData<Int> {
+        Log.i("Test", "Get: ${buttonCLicked3.value}")
+        return buttonCLicked3
     }
 }
