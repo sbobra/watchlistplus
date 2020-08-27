@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.letterboxdwatchlistplus.views.WatchlistFragmentDirections
 import com.example.letterboxdwatchlistplus.databinding.FragmentWatchlistBinding
 import com.example.letterboxdwatchlistplus.viewmodels.WatchlistViewModel
@@ -17,6 +19,13 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class WatchlistFragment : Fragment() {
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private val watchListViewModel: WatchlistViewModel by activityViewModels()
+    private var _binding: FragmentWatchlistBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -28,29 +37,31 @@ class WatchlistFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentWatchlistBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-       val watchListViewModel: WatchlistViewModel by activityViewModels()
-        _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
-        binding.watchListViewModel = watchListViewModel
-        binding.lifecycleOwner = viewLifecycleOwner // need to call this when using livedata and viewbinding
+        initializeBinding(inflater, container)
 
-
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.watchListRecyclerView.layoutManager = linearLayoutManager
         binding.textTest.setOnClickListener { onClick() }
 
-        val watchlistViewModel: WatchlistViewModel by activityViewModels()
-        watchlistViewModel.getNameList().observe(viewLifecycleOwner, Observer<ArrayList<String>>{ name ->
-            // update UI
-        })
+        setUpdateViewModel()
 
         return binding.root
+    }
+
+    private fun initializeBinding(inflater: LayoutInflater, container: ViewGroup?) {
+        _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
+        binding.watchListViewModel = watchListViewModel
+        binding.lifecycleOwner =
+            viewLifecycleOwner // need to call this when using livedata and viewbinding
+    }
+
+    private fun setUpdateViewModel() {
+        watchListViewModel.getNameList()
+            .observe(viewLifecycleOwner, Observer<ArrayList<String>> { name ->
+                // update UI
+            })
     }
 
     companion object {
