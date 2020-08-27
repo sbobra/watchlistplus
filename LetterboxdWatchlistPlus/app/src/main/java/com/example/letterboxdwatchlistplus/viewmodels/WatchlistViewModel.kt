@@ -10,12 +10,7 @@ class WatchlistViewModel : ViewModel() {
         WatchlistRepository()
     }
 
-    fun getText(): LiveData<String> {
+    fun getNameList(): MutableLiveData<ArrayList<String>> {
         return repository.get()
     }
-//
-//    private fun loadText() {
-//        // Do an asynchronous operation to fetch users.
-//    repository.get()
-//    }
 }

@@ -13,18 +13,10 @@ import com.example.letterboxdwatchlistplus.views.WatchlistFragmentDirections
 import com.example.letterboxdwatchlistplus.databinding.FragmentWatchlistBinding
 import com.example.letterboxdwatchlistplus.viewmodels.WatchlistViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WatchlistFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WatchlistFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -45,17 +37,16 @@ class WatchlistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        // Inflate the layout for this fragment
-//        val binding = FragmentWatchlistBinding.inflate(layoutInflater)
-//
-//        return inflater.inflate(R.layout.fragment_watchlist, container, false)
-
+       val watchListViewModel: WatchlistViewModel by activityViewModels()
         _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
+        binding.watchListViewModel = watchListViewModel
+        binding.lifecycleOwner = viewLifecycleOwner // need to call this when using livedata and viewbinding
+
 
         binding.textTest.setOnClickListener { onClick() }
 
-        val watchlistViewModel: WatchlistViewModel by viewModels()
-        watchlistViewModel.getText().observe(viewLifecycleOwner, Observer<String>{ text ->
+        val watchlistViewModel: WatchlistViewModel by activityViewModels()
+        watchlistViewModel.getNameList().observe(viewLifecycleOwner, Observer<ArrayList<String>>{ name ->
             // update UI
         })
 
@@ -63,15 +54,6 @@ class WatchlistFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WatchlistFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             WatchlistFragment().apply {
@@ -82,10 +64,10 @@ class WatchlistFragment : Fragment() {
             }
     }
 
+    // How to navigate manually to another fragment
     private fun onClick() {
         val action =
             WatchlistFragmentDirections.actionWatchlistFragmentToImportFragment()
-//        view.findNavController().navigate(action)
-        this.findNavController().navigate(action)
+        findNavController().navigate(action)
     }
 }
