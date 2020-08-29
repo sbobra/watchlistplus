@@ -3,13 +3,13 @@ package com.example.letterboxdwatchlistplus.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.letterboxdwatchlistplus.databinding.WatchlistRecyclerviewItemBinding
 
 
-//TODO: adapter isn't referenced anywhere
-class WatchlistAdapter(private var names: ArrayList<String>) :
-    RecyclerView.Adapter<WatchlistAdapter.WatchlistHolder>() {
+class WatchlistAdapter : ListAdapter<String, WatchlistAdapter.WatchlistHolder>(WatchlistDiffCallback()) {
     //https://www.raywenderlich.com/1560485-android-recyclerview-tutorial-with-kotlin
 
     private var _binding: WatchlistRecyclerviewItemBinding? = null
@@ -41,29 +41,40 @@ class WatchlistAdapter(private var names: ArrayList<String>) :
         //TODO: but also, this doesn't have to be a MutableLiveData the setup only happens once and then it doesn't need to change if the string changes
         //TODO: can just be a normal string
         //TODO: how to use databinding to set up onclick listener
-        val currentName: String = names[position]
+        val currentName: String = getItem(position)
         holder.setUp(currentName)
     }
 
-    override fun getItemCount(): Int {
-        return names.size
-    }
+    // class WatchlistHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class WatchlistHolder(private val itemViewBinding: WatchlistRecyclerviewItemBinding) : RecyclerView.ViewHolder(itemViewBinding.root) {
+//        private lateinit var itemViewBinding: WatchlistRecyclerviewItemBinding
+//
+//        constructor(itemViewBinding: WatchlistRecyclerviewItemBinding) : this(itemViewBinding.root) {
+//            this.itemViewBinding = itemViewBinding
+//        }
 
-    fun setNames(names: ArrayList<String>) {
-        this.names = names
-    }
-
-    class WatchlistHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var itemViewBinding: WatchlistRecyclerviewItemBinding
-
-        constructor(itemViewBinding: WatchlistRecyclerviewItemBinding) : this(itemViewBinding.root) {
-            this.itemViewBinding = itemViewBinding
+        init {
+//            itemViewBinding.setClickListener {
+//                itemViewBinding.plant?.let { plant ->
+//                    navigateToPlant(plant, it)
+//                }
+//            }
         }
 
         fun setUp(item: String) {
             // TODO: This could be stored as a string
             itemViewBinding.itemName = item
-//            holder.binding.executePendingBindings()
+//            itemViewBinding.executePendingBindings()
+        }
+    }
+
+    private class WatchlistDiffCallback : DiffUtil.ItemCallback<String>() {
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
         }
     }
 

@@ -45,7 +45,10 @@ class WatchlistFragment : Fragment() {
 
         initializeBinding(inflater, container)
 
+        adapter = WatchlistAdapter()
         linearLayoutManager = LinearLayoutManager(context)
+        binding.watchListRecyclerView.layoutManager = linearLayoutManager
+        binding.watchListRecyclerView.adapter = adapter
 
         binding.textTest.setOnClickListener { onClick() }
 
@@ -66,14 +69,18 @@ class WatchlistFragment : Fragment() {
             .observe(viewLifecycleOwner, Observer<ArrayList<String>> { names ->
                 // update UI
                 //adapter.notifyDataSetChanged()
-                if (!this::adapter.isInitialized) {
-                    adapter = WatchlistAdapter(names)
-                    binding.watchListRecyclerView.layoutManager = linearLayoutManager
-                    binding.watchListRecyclerView.adapter = adapter
-                } else {
-                    adapter.setNames(names)
-                    adapter.notifyDataSetChanged()
-                }
+
+                //old version
+//                if (!this::adapter.isInitialized) {
+//                    adapter = WatchlistAdapter(names)
+//                    binding.watchListRecyclerView.layoutManager = linearLayoutManager
+//                    binding.watchListRecyclerView.adapter = adapter
+//                } else {
+//                    adapter.setNames(names)
+//                    adapter.notifyDataSetChanged()
+//                }
+
+                adapter.submitList(names)
             })
     }
 
