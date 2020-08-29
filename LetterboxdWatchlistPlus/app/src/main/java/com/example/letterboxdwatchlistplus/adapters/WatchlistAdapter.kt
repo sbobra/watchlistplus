@@ -1,35 +1,66 @@
 package com.example.letterboxdwatchlistplus.adapters
 
+import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.letterboxdwatchlistplus.R
-import com.example.letterboxdwatchlistplus.utils.inflate
+import com.example.letterboxdwatchlistplus.databinding.WatchlistRecyclerviewItemBinding
 
-class WatchlistAdapter(private val names: MutableLiveData<ArrayList<String>>) : RecyclerView.Adapter<WatchlistAdapter.WatchlistHolder>() {
+
+//TODO: adapter isn't referenced anywhere
+class WatchlistAdapter(private val names: ArrayList<MutableLiveData<String>>) : RecyclerView.Adapter<WatchlistAdapter.WatchlistHolder>() {
     //https://www.raywenderlich.com/1560485-android-recyclerview-tutorial-with-kotlin
+
+    private var _binding: WatchlistRecyclerviewItemBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchlistHolder {
         // WITHOUT EXTENSION FUNCTION:
 //        return WatchlistHolder(LayoutInflater.from(parent.context).inflate(R.layout.watchlist_recyclerview_item, parent, false)
-        val inflatedView = parent.inflate(R.layout.watchlist_recyclerview_item, false)
-        return WatchlistHolder(inflatedView)
+
+        // WITH KOTLIN EXTENSION FUNCTION
+//        val inflatedView = parent.inflate(R.layout.watchlist_recyclerview_item, false)
+//        return WatchlistHolder(inflatedView)
+
+        _binding = WatchlistRecyclerviewItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        //TODO: need this if we want to use LiveData
+        binding.lifecycleOwner = parent.lifeCycleOwner
+        return WatchlistHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WatchlistHolder, position: Int) {
-        val currentName : String = names.value?.get(position) ?: ""
-
+        //TODO: make this a List<MutableLiveData<String>>
+        //TODO: but also, this doesn't have to be a MutableLiveData the setup only happens once and then it doesn't need to change if the string changes
+        //TODO: can just be a normal string
+        //TODO: how to use databinding to set up onclick listener
+        val currentName : MutableLiveData<String> = names[position]
+        holder.setUp(currentName)
     }
 
     override fun getItemCount(): Int {
-        return names.value?.size ?: 0
+        return names.size
     }
 
     class WatchlistHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
+        private lateinit var itemViewBinding : WatchlistRecyclerviewItemBinding
 
+        constructor(itemViewBinding: WatchlistRecyclerviewItemBinding) : this(itemViewBinding.root) {
+            this.itemViewBinding = itemViewBinding
+        }
+
+        fun setUp(item: MutableLiveData<String>) {
+            // TODO: This could be stored as a string
+            itemViewBinding.itemName = item
+//            holder.binding.executePendingBindings()
         }
     }
 
