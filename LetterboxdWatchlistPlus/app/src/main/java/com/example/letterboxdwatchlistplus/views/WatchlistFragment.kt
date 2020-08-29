@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.letterboxdwatchlistplus.adapters.WatchlistAdapter
 import com.example.letterboxdwatchlistplus.databinding.FragmentWatchlistBinding
 import com.example.letterboxdwatchlistplus.viewmodels.WatchlistViewModel
@@ -17,7 +17,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class WatchlistFragment : Fragment() {
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var adapter: WatchlistAdapter
     private val watchListViewModel: WatchlistViewModel by activityViewModels()
     private var _binding: FragmentWatchlistBinding? = null
@@ -46,8 +46,8 @@ class WatchlistFragment : Fragment() {
         initializeBinding(inflater, container)
 
         adapter = WatchlistAdapter()
-        linearLayoutManager = LinearLayoutManager(context)
-        binding.watchListRecyclerView.layoutManager = linearLayoutManager
+        gridLayoutManager = GridLayoutManager(context, 3)
+        binding.watchListRecyclerView.layoutManager = gridLayoutManager
         binding.watchListRecyclerView.adapter = adapter
 
         binding.textTest.setOnClickListener { onClick() }
