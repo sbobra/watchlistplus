@@ -46,6 +46,7 @@ class ImportFragment : Fragment() {
             importViewModel.buttonClicked()
         }
 
+        // livedata observer
         importViewModel.getButtonClicked().observe(viewLifecycleOwner, Observer<Int> { buttonClickedCount ->
             binding.welcomeText.text = "hello $buttonClickedCount"
         })

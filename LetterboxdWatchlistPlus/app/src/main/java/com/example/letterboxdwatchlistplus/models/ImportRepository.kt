@@ -5,9 +5,11 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 
 class ImportRepository {
+    // MutableLIveData + no databinding
     private var buttonClicked : MutableLiveData<Int> = MutableLiveData(0)
+    // Observable + databinding
     private var buttonClicked2 : ObservableInt = ObservableInt(10)
-    // THIS IS THE BEST PATH
+    // THIS IS THE BEST PATH - mutableLiveData + DataBinding
     private var buttonCLicked3 : MutableLiveData<Int> = MutableLiveData(0)
 
 

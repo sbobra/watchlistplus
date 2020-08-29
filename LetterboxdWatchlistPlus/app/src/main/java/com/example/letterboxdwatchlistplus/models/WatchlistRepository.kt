@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 class WatchlistRepository {
 
     private val nameList = MutableLiveData<ArrayList<String>>().apply {
-        value = ArrayList()
+        value = arrayListOf("test1", "test2", "test3", "test4", "test5")
     }
 
 

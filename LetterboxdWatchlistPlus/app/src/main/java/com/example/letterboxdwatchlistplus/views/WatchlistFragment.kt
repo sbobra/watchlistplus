@@ -1,17 +1,15 @@
 package com.example.letterboxdwatchlistplus.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.letterboxdwatchlistplus.views.WatchlistFragmentDirections
+import com.example.letterboxdwatchlistplus.adapters.WatchlistAdapter
 import com.example.letterboxdwatchlistplus.databinding.FragmentWatchlistBinding
 import com.example.letterboxdwatchlistplus.viewmodels.WatchlistViewModel
 
@@ -20,8 +18,10 @@ private const val ARG_PARAM2 = "param2"
 
 class WatchlistFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: WatchlistAdapter
     private val watchListViewModel: WatchlistViewModel by activityViewModels()
     private var _binding: FragmentWatchlistBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -37,12 +37,16 @@ class WatchlistFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         initializeBinding(inflater, container)
 
         linearLayoutManager = LinearLayoutManager(context)
-        binding.watchListRecyclerView.layoutManager = linearLayoutManager
+
         binding.textTest.setOnClickListener { onClick() }
 
         setUpdateViewModel()
@@ -59,8 +63,17 @@ class WatchlistFragment : Fragment() {
 
     private fun setUpdateViewModel() {
         watchListViewModel.getNameList()
-            .observe(viewLifecycleOwner, Observer<ArrayList<String>> { name ->
+            .observe(viewLifecycleOwner, Observer<ArrayList<String>> { names ->
                 // update UI
+                //adapter.notifyDataSetChanged()
+                if (!this::adapter.isInitialized) {
+                    adapter = WatchlistAdapter(names)
+                    binding.watchListRecyclerView.layoutManager = linearLayoutManager
+                    binding.watchListRecyclerView.adapter = adapter
+                } else {
+                    adapter.setNames(names)
+                    adapter.notifyDataSetChanged()
+                }
             })
     }
 

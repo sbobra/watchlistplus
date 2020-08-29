@@ -1,16 +1,15 @@
 package com.example.letterboxdwatchlistplus.adapters
 
-import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.letterboxdwatchlistplus.databinding.WatchlistRecyclerviewItemBinding
 
 
 //TODO: adapter isn't referenced anywhere
-class WatchlistAdapter(private val names: ArrayList<MutableLiveData<String>>) : RecyclerView.Adapter<WatchlistAdapter.WatchlistHolder>() {
+class WatchlistAdapter(private var names: ArrayList<String>) :
+    RecyclerView.Adapter<WatchlistAdapter.WatchlistHolder>() {
     //https://www.raywenderlich.com/1560485-android-recyclerview-tutorial-with-kotlin
 
     private var _binding: WatchlistRecyclerviewItemBinding? = null
@@ -33,7 +32,7 @@ class WatchlistAdapter(private val names: ArrayList<MutableLiveData<String>>) : 
             false
         )
         //TODO: need this if we want to use LiveData
-        binding.lifecycleOwner = parent.lifeCycleOwner
+//        binding.lifecycleOwner = parent.lifeCycleOwner
         return WatchlistHolder(binding)
     }
 
@@ -42,7 +41,7 @@ class WatchlistAdapter(private val names: ArrayList<MutableLiveData<String>>) : 
         //TODO: but also, this doesn't have to be a MutableLiveData the setup only happens once and then it doesn't need to change if the string changes
         //TODO: can just be a normal string
         //TODO: how to use databinding to set up onclick listener
-        val currentName : MutableLiveData<String> = names[position]
+        val currentName: String = names[position]
         holder.setUp(currentName)
     }
 
@@ -50,14 +49,18 @@ class WatchlistAdapter(private val names: ArrayList<MutableLiveData<String>>) : 
         return names.size
     }
 
+    fun setNames(names: ArrayList<String>) {
+        this.names = names
+    }
+
     class WatchlistHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var itemViewBinding : WatchlistRecyclerviewItemBinding
+        private lateinit var itemViewBinding: WatchlistRecyclerviewItemBinding
 
         constructor(itemViewBinding: WatchlistRecyclerviewItemBinding) : this(itemViewBinding.root) {
             this.itemViewBinding = itemViewBinding
         }
 
-        fun setUp(item: MutableLiveData<String>) {
+        fun setUp(item: String) {
             // TODO: This could be stored as a string
             itemViewBinding.itemName = item
 //            holder.binding.executePendingBindings()
