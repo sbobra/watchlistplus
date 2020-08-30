@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.letterboxdwatchlistplus.databinding.WatchlistRecyclerviewItemBinding
+import com.example.letterboxdwatchlistplus.models.WatchlistItem
 
 
-class WatchlistAdapter : ListAdapter<String, WatchlistAdapter.WatchlistHolder>(WatchlistDiffCallback()) {
+class WatchlistAdapter : ListAdapter<WatchlistItem, WatchlistAdapter.WatchlistHolder>(WatchlistDiffCallback()) {
     //https://www.raywenderlich.com/1560485-android-recyclerview-tutorial-with-kotlin
-
     private var _binding: WatchlistRecyclerviewItemBinding? = null
 
     // This property is only valid between onCreateView and
@@ -41,8 +41,8 @@ class WatchlistAdapter : ListAdapter<String, WatchlistAdapter.WatchlistHolder>(W
         //TODO: but also, this doesn't have to be a MutableLiveData the setup only happens once and then it doesn't need to change if the string changes
         //TODO: can just be a normal string
         //TODO: how to use databinding to set up onclick listener
-        val currentName: String = getItem(position)
-        holder.setUp(currentName)
+        val currentItem: WatchlistItem = getItem(position)
+        holder.setUp(currentItem)
     }
 
     // class WatchlistHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -61,19 +61,19 @@ class WatchlistAdapter : ListAdapter<String, WatchlistAdapter.WatchlistHolder>(W
 //            }
         }
 
-        fun setUp(item: String) {
+        fun setUp(item: WatchlistItem) {
             // TODO: This could be stored as a string
-            itemViewBinding.itemName = item
+            itemViewBinding.item = item
 //            itemViewBinding.executePendingBindings()
         }
     }
 
-    private class WatchlistDiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    private class WatchlistDiffCallback : DiffUtil.ItemCallback<WatchlistItem>() {
+        override fun areItemsTheSame(oldItem: WatchlistItem, newItem: WatchlistItem): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: WatchlistItem, newItem: WatchlistItem): Boolean {
             return oldItem == newItem
         }
     }

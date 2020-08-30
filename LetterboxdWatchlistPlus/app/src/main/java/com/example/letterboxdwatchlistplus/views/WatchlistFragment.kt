@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.letterboxdwatchlistplus.adapters.WatchlistAdapter
 import com.example.letterboxdwatchlistplus.databinding.FragmentWatchlistBinding
+import com.example.letterboxdwatchlistplus.models.WatchlistItem
 import com.example.letterboxdwatchlistplus.viewmodels.WatchlistViewModel
 
 private const val ARG_PARAM1 = "param1"
@@ -66,7 +67,7 @@ class WatchlistFragment : Fragment() {
 
     private fun setUpdateViewModel() {
         watchListViewModel.getNameList()
-            .observe(viewLifecycleOwner, Observer<ArrayList<String>> { names ->
+            .observe(viewLifecycleOwner, Observer<ArrayList<WatchlistItem>> { movies ->
                 // update UI
                 //adapter.notifyDataSetChanged()
 
@@ -80,7 +81,7 @@ class WatchlistFragment : Fragment() {
 //                    adapter.notifyDataSetChanged()
 //                }
 
-                adapter.submitList(names)
+                adapter.submitList(movies)
             })
     }
 

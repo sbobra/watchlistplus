@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-<!--        <import type="androidx.lifecycle.MutableLiveData" />-->
+        <import type="com.example.letterboxdwatchlistplus.models.WatchlistItem" />
 <!--        <variable-->
 <!--            name="itemName"-->
 <!--            type="MutableLiveData&lt;String>" />-->
         <variable
-            name="itemName"
-            type="String" />
+            name="item"
+            type="WatchlistItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:id="@+id/view_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{itemName}"
+            android:text="@{item.movie.name}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
