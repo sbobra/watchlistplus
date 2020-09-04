@@ -10,10 +10,8 @@ import com.example.letterboxdwatchlistplus.models.WatchlistRepository
 class WatchlistViewModel : ViewModel() {
     private val selectMode : MutableLiveData<Boolean> = MutableLiveData(false)
 
-
-
     private val repository: WatchlistRepository by lazy {
-        WatchlistRepository(selectMode)
+        WatchlistRepository()
     }
 
     fun getNameList(): MutableLiveData<ArrayList<WatchlistItem>> {
@@ -22,6 +20,12 @@ class WatchlistViewModel : ViewModel() {
 
     fun toggleSelectMode() {
         selectMode.value = selectMode.value?.not()
+
+        repository.nameList.value?.let {
+            for (item in it) {
+                item.selectedState.value = selectMode.value
+            }
+        }
     }
 
     fun getSelectMode() : MutableLiveData<Boolean> {

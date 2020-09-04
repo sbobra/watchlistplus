@@ -2,8 +2,9 @@ package com.example.letterboxdwatchlistplus.models
 
 import androidx.lifecycle.MutableLiveData
 
-class WatchlistItem(val movie: Movie, val mainSelectMode: MutableLiveData<Boolean>) {
-    private val selectedState: MutableLiveData<Boolean> = MutableLiveData(false)
+class WatchlistItem(val movie: Movie) {
+    val selectedState: MutableLiveData<Boolean> = MutableLiveData(false)
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -2,12 +2,12 @@ package com.example.letterboxdwatchlistplus.models
 
 import androidx.lifecycle.MutableLiveData
 
-class WatchlistRepository(private val selectMode: MutableLiveData<Boolean>) {
+class WatchlistRepository {
 
-    private val nameList = MutableLiveData<ArrayList<WatchlistItem>>().apply {
+    val nameList = MutableLiveData<ArrayList<WatchlistItem>>().apply {
         value = ArrayList()
         for (i in 0..50) {
-            val item = WatchlistItem(Movie("test$i"), selectMode)
+            val item = WatchlistItem(Movie("test$i"))
             value?.add(item)
         }
     }
