@@ -1,6 +1,6 @@
 package com.example.letterboxdwatchlistplus.api
 
-import retrofit2.Call
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,5 +14,5 @@ import retrofit2.http.Query
 
 interface OmdbApi {
     @GET("")
-    fun getMovie(@Query("apikey") key: String): Call<OmdbMovie>
+    fun getMovie(@Query("apikey") key: String): Observable<OmdbMovie>
 }
