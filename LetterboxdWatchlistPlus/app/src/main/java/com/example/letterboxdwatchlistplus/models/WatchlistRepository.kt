@@ -21,9 +21,7 @@ class WatchlistRepository {
         return nameList
     }
 
-    fun delete(user: String) {
-        for (user in nameList.value!!) {
+    fun download() {
 
-        }
     }
 }
